@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* Optional global reset so Tailwind utilities render as expected */
+body {
+	margin: 0;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
