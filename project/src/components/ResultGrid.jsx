@@ -69,8 +69,8 @@ const ResultGrid = () => {
       )}
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {results.map((item) => (
-          <ResultCard key={`${item.type}-${item.id}`} item={item} />
+        {results.map((item, index) => (
+          <ResultCard key={item.id ? `${item.type}-${item.id}` : `${item.type}-${index}`} item={item} />
         ))}
       </div>
     </div>
