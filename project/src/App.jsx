@@ -1,27 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import { fetchPhotos } from './api/mediaApi'
+import { fetchPhotos , fetchVideos , fetchGifs } from './api/mediaApi'
+import SearchBar from './components/SearchBar'
+import Tabs from './components/Tabs'
+import ResultGrid from './components/ResultGrid'
 
 const App = () => {
   const [error, setError] = useState(null)
   const [photos, setPhotos] = useState([])
 
-  useEffect(() => {
-    fetchPhotos('cat')
-      .then((data) => setPhotos(data))
-      .catch((err) => {
-        setError(err?.message || 'Failed to load photos')
-      })
-  }, [])
+  const getPhotos = async (query = 'cat') => {
+    try {
+      const data = await fetchPhotos(query)
+      setPhotos(data?.results || data)
+      console.log(data)
+    } catch (err) {
+      setError(err.message || 'Failed to fetch photos')
+    }
+  }
+
+  const getVideos = async (query = 'cat') => {
+    try {
+      const data = await fetchVideos(query)
+      console.log(data)
+    } catch (err) {
+      setError(err.message || 'Failed to fetch videos')
+    }
+  }
+
+  const getGifs = async (query = 'cat') => {  
+    try {
+      const data = await fetchGifs(query)
+      console.log(data)
+    } catch (err) {
+      setError(err.message || 'Failed to fetch gifs')
+    }
+  }
 
   return (
-    <div className='h-screen w-full bg-blue-500 text-white p-4'>
-      <div>hello</div>
-      {error && <div className='mt-2 text-sm text-red-200'>Error: {error}</div>}
-      {!error && photos.length === 0 && <div className='mt-2 text-sm'>Loading photos…</div>}
-      {!error && photos.length > 0 && (
-        <div className='mt-3 text-sm'>Loaded {photos.length} photos</div>
-      )}
+    <div className='h-screen w-full bg-black text-white p-4'>
+     <SearchBar />
+     <Tabs />
+     <ResultGrid />
     </div>
   )
 }
