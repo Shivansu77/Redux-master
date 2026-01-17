@@ -12,9 +12,11 @@ const SearchPage = () => {
   return (
     <div className='min-h-screen w-full bg-black text-white'>
       <Navbar />
-      <div className='p-4'>
+      <div className='max-w-7xl mx-auto py-6'>
         <SearchBar />
-        <Tabs />
+        <div className='mt-4'>
+          <Tabs />
+        </div>
         <ResultGrid />
       </div>
     </div>

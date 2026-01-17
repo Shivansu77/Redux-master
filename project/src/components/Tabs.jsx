@@ -8,24 +8,26 @@ const Tabs = () => {
   const activeTab = useSelector(state => state.search.activeTab)
 
   return (
-    <div className="flex gap-10 p-10">
-      {tabs.map((ele) => {
-        const tabValue = ele.toLowerCase()
+    <div className="px-4 md:px-8">
+      <div className="inline-flex gap-2 bg-gray-900/70 border border-gray-800 p-2 rounded-2xl shadow-lg">
+        {tabs.map((ele) => {
+          const tabValue = ele.toLowerCase()
 
-        return (
-          <button
-            key={ele}
-            onClick={() => dispatch(setActiveTabs(tabValue))}
-            className={`
-              border px-5 py-2 rounded uppercase cursor-pointer
-              active:scale-95
-              ${activeTab === tabValue ? 'bg-blue-700' : 'bg-gray-600'}
-            `}
-          >
-            {ele}
-          </button>
-        )
-      })}
+          return (
+            <button
+              key={ele}
+              onClick={() => dispatch(setActiveTabs(tabValue))}
+              className={`
+                px-4 py-2 rounded-xl uppercase text-sm font-semibold tracking-wide
+                transition active:scale-95
+                ${activeTab === tabValue ? 'bg-blue-600 text-white shadow' : 'text-gray-300 hover:bg-gray-800'}
+              `}
+            >
+              {ele}
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 }

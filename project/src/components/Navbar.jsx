@@ -9,9 +9,11 @@ const Navbar = () => {
   const inactive = 'bg-gray-800 text-gray-200 hover:bg-gray-700'
 
   return (
-    <nav className='w-full bg-black text-white border-b border-gray-800'>
+    <nav className='w-full bg-black/80 text-white border-b border-gray-800 backdrop-blur'>
       <div className='max-w-7xl mx-auto px-4 py-4 flex items-center justify-between'>
-        <Link to="/" className='text-xl font-bold'>SurfMedia</Link>
+        <Link to="/" className='text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent'>
+          SurfMedia
+        </Link>
         <div className='flex items-center gap-3'>
           <Link
             to="/search"

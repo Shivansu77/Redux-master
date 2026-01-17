@@ -2,24 +2,38 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { setQuery } from '../redux/features/searchSlice'
+
 const SearchBar = () => {
-
     const [text, settext] = useState('')
+    const dispatch = useDispatch()
 
-    const dispatch = useDispatch();
-
-    const submitHandler = (e) =>{
-        e.preventDefault();
-        console.log("Submitted", text);
-        dispatch(setQuery(text));
-        settext('');
+    const submitHandler = (e) => {
+        e.preventDefault()
+        dispatch(setQuery(text))
+        settext('')
     }
+
   return (
-    <div>
-        <form onSubmit={submitHandler} className='flex p-10 gap-5 bg-gray-900 justify-center items-center'>
-            <input onChange={(e) => settext(e.target.value)} value={text} className='w-full border-2 px-4 py-2 text-xl rounded-l outline-none' type="text" placeholder='Search anything ....' required/>
-            <button className='border-2  px-4 py-2 cursor-pointer rounded-sm' type="submit">Search</button>
-        </form>
+    <div className='px-4 md:px-8'>
+      <form
+        onSubmit={submitHandler}
+        className='flex flex-col md:flex-row gap-3 md:gap-4 bg-gray-900/70 border border-gray-800 p-4 md:p-6 rounded-2xl shadow-lg backdrop-blur'
+      >
+        <input
+          onChange={(e) => settext(e.target.value)}
+          value={text}
+          className='w-full bg-transparent border-b border-gray-700 px-1 py-2 text-lg outline-none focus:border-blue-500 placeholder:text-gray-500'
+          type="text"
+          placeholder='Search photos, videos, gifs...'
+          required
+        />
+        <button
+          className='px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition'
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { fetchPhotos, fetchVideos, fetchGifs } from '../api/mediaApi'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLoading, setResults, setError, clearResults } from '../redux/features/searchSlice'
+import Loader from './Loader'
 import ResultCard from './ResultCard'
 
 const ResultGrid = () => {
@@ -60,8 +61,8 @@ const ResultGrid = () => {
     getData()
   }, [query, activeTab, dispatch])
   return (
-    <div className="p-6">
-      {loading && <div className="text-center text-gray-300">Loading...</div>}
+    <div className="px-4 md:px-8 py-6">
+      {loading && <Loader />}
       {error && <div className="text-center text-red-400">{error}</div>}
 
       {!loading && !error && results.length === 0 && (
