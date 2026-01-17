@@ -43,8 +43,9 @@ const ResultCard = ({ item }) => {
 				{/* Save Button */}
 				<button
 					onClick={() => dispatch(addToCollection(item))}
-					className={`mt-auto self-end text-white text-xs px-3 py-1 rounded-lg ${exists ? 'bg-gray-600 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'}`}
+					className={`mt-auto self-end text-xs px-3 py-1 rounded-full border transition ${exists ? 'bg-gray-700 border-gray-600 text-gray-300 cursor-not-allowed' : 'border-green-500 text-green-300 hover:bg-green-600 hover:text-white'}`}
 					disabled={exists}
+					title={exists ? 'Already in collection' : 'Save to collection'}
 				>
 					{exists ? 'Saved' : 'Save'}
 				</button>
@@ -53,4 +54,4 @@ const ResultCard = ({ item }) => {
 	)
 }
 
-export default ResultCard
+export default React.memo(ResultCard)
