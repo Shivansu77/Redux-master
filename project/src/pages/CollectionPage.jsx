@@ -1,29 +1,13 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import ResultCard from '../components/ResultCard'
 import Navbar from '../components/Navbar'
+import { removeFromCollection, clearCollections } from '../redux/features/collectionSlice'
 
 const CollectionPage = () => {
-  // Get collections from localStorage
-  const [collections, setCollections] = React.useState([])
-
-  // Load collections from localStorage on mount
-  React.useEffect(() => {
-    const savedCollections = localStorage.getItem('mediaCollections')
-    if (savedCollections) {
-      setCollections(JSON.parse(savedCollections))
-    }
-  }, [])
-
-  const removeFromCollection = (itemId) => {
-    const updatedCollections = collections.filter(item => item.id !== itemId)
-    setCollections(updatedCollections)
-    localStorage.setItem('mediaCollections', JSON.stringify(updatedCollections))
-  }
-
-  const clearAllCollections = () => {
-    setCollections([])
-    localStorage.removeItem('mediaCollections')
-  }
+  const dispatch = useDispatch()
+  const collections = useSelector((state) => state.collection.items)
 
   return (
     <div className='min-h-screen w-full bg-black text-white'>
@@ -53,7 +37,7 @@ const CollectionPage = () => {
                 Total items: <span className='font-bold text-white'>{collections.length}</span>
               </p>
               <button 
-                onClick={clearAllCollections}
+                onClick={() => dispatch(clearCollections())}
                 className='px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg font-semibold transition duration-200'
               >
                 Clear All
@@ -68,7 +52,7 @@ const CollectionPage = () => {
                     item={item}
                   />
                   <button
-                    onClick={() => removeFromCollection(item.id)}
+                    onClick={() => dispatch(removeFromCollection(item.id))}
                     className='absolute top-2 right-2 bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm font-semibold opacity-0 group-hover:opacity-100 transition duration-200'
                   >
                     Remove

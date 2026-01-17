@@ -1,10 +1,11 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { addToCollection } from '../redux/features/collectionSlice'
 
-const ResultCard = ({ item}) => {
+const ResultCard = ({ item }) => {
 	if (!item) return null
-    const addToCollections = (item) => {
-        console.log('Saved to collections:', item);
-    }
+	const dispatch = useDispatch()
+	const exists = useSelector((state) => state.collection.items.some((i) => i.id === item.id))
 	return (
 		<div className="rounded-lg overflow-hidden bg-gray-900 border border-gray-700 flex flex-col">
 			{item.type === 'video' ? (
@@ -41,10 +42,11 @@ const ResultCard = ({ item}) => {
 
 				{/* Save Button */}
 				<button
-					onClick={() => addToCollections(item)}
-					className="mt-auto self-end bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1 rounded"
+					onClick={() => dispatch(addToCollection(item))}
+					className={`mt-auto self-end text-white text-xs px-3 py-1 rounded ${exists ? 'bg-gray-600 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'}`}
+					disabled={exists}
 				>
-					Save
+					{exists ? 'Saved' : 'Save'}
 				</button>
 			</div>
 		</div>
