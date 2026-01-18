@@ -5,3 +5,14 @@ body {
 	margin: 0;
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
+
+.dot-grid {
+	background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+	background-size: 20px 20px;
+	background-position: 0 0;
+	transition: background-image 200ms ease;
+}
+
+.dot-grid:hover {
+	background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+}
